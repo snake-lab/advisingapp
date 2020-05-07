@@ -13,6 +13,12 @@ const Courses = new mongoose.Schema({
     courseCredit: {
         type:Number,
         
+    },
+    schedule:{
+        type:String,
+    },
+    room:{
+        type:String,
     }
 });
 

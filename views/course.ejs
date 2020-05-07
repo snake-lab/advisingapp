@@ -1,0 +1,96 @@
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">
+         <a href="/courses/add">Add Courses</a>
+        </h1>
+        <% include ./partials/messages %>
+        <form action="/courses/add" method="POST">
+          <div class="form-group">
+            <label for="courseId">Course ID</label>
+            <input
+              type="text"
+              id="courseId"
+              name="courseId"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="courseTitle">Course Title</label>
+            <input
+              type="text"
+              id="courseTitle"
+              name="courseTitle"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="courseDept">Course Department</label>
+            <input
+              type="text"
+              id="courseDept"
+              name="courseDept"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="courseCredit">Course Credit</label>
+            <input
+              type="text"
+              id="courseCredit"
+              name="courseCredit"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="courseCredit">Course Credit</label>
+            <input
+              type="text"
+              id="schedule"
+              name="schedule"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="room">Course Credit</label>
+            <input
+              type="text"
+              id="room"
+              name="room"
+              class="form-control"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Add Course
+          </button>
+        </form>
+      </div>
+    </div>
+
+</div>
+<br/>
+<br/>
+<br/>
+<div class="row">
+<table class="table">
+    <thead>
+      <tr>
+        <th>Course ID</th>
+        <th>Course Title</th>
+        <th>Course Dept</th>
+        <th>Course Credit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% courses.forEach(course => { %>
+      <tr>
+        <td> <%= course.courseId %></td>
+        <td> <%= course.courseTitle %></td>
+        <td> <%= course.courseDept %></td>
+        <td> <%= course.courseCredit %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+ 

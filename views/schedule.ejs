@@ -1,0 +1,20 @@
+<div class="row">
+    <table class="table">
+        <thead>
+          <tr>
+            <th>Schedule</th>
+            <th>Room</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <% courses.forEach(course => { %>
+          <tr>
+            <td> <%= course.schedule %></td>
+            <td> <%= course.room %></td>
+            
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>

@@ -1,0 +1,16 @@
+<div class="container">
+    <div class = "row">
+        <a href="/users/editprofile/<%= userinfo._id %>" class="btn btn-success ml-4">Edit</a>
+        <br />
+        <ul class="list-group">
+            <li class="list-group-item active">Name: <%= userinfo.name%></li>
+            <li class="list-group-item">Email: <%= userinfo.email %></li>
+            <li class="list-group-item">Student ID: <%= userinfo.stdId %></li>
+            <li class="list-group-item">Student Department: <%= userinfo.stdDept %></li>
+            <li class="list-group-item">Student Phone: <%= userinfo.stdPhone %></li>
+            <li class="list-group-item">CGPA: <%= userinfo.stdCGPA %></li>
+            <li class="list-group-item">Date: <%= userinfo.date %></li>
+        </ul>
+    </div>
+</div>
+

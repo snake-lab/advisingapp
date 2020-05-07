@@ -2,9 +2,16 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+const mongojs = require("mongojs")
 // Load User model
 const User = require("../models/User");
 const { forwardAuthenticated } = require("../config/auth");
+
+
+var db = mongojs('mongodb://localhost:27017/advising', ['users'])
+var ObjectId = mongojs.ObjectID;
+
+
 
 router.get("/advising1", (req, res) => {
   if (req.isAuthenticated()) {
@@ -34,10 +41,10 @@ router.get("/register", forwardAuthenticated, (req, res) => {
 
 // Register
 router.post("/register", (req, res) => {
-  const { name, email, password, password2 } = req.body;
+  const { name, email, stdId, password, password2 } = req.body;
   let errors = [];
 
-  if (!name || !email || !password || !password2) {
+  if (!name || !email || !stdId|| !password || !password2) {
     errors.push({ msg: "Please enter all fields" });
   }
 
@@ -54,6 +61,7 @@ router.post("/register", (req, res) => {
       errors,
       name,
       email,
+      stdId,
       password,
       password2,
     });
@@ -72,6 +80,7 @@ router.post("/register", (req, res) => {
         const newUser = new User({
           name,
           email,
+          stdId,
           password,
         });
 
@@ -97,8 +106,77 @@ router.post("/register", (req, res) => {
 });
 
 //edit profile routes
+// users/profile
+router.get("/profile", (req, res) => {
+  if(req.isAuthenticated()){
+    res.render("profile",{
+      userinfo:req.user
+    });
+  }
+});
 
-router.put("/editprofile", (req, res, next) => {});
+// router.get('/editprofile/:id', async(req,res)=>{
+//   if(req.isAuthenticated()){
+//       res.render("editprofile",{
+//         userinfo:req.user
+//       })
+//     }else{
+//       res.redirect('/users/login')
+//     }
+// })
+
+
+router.put('/editprofile/',async (req,res)=>{
+  if(req.isAuthenticated()){
+    const { name, email, stdId, stdDept, stdPhone,stdCGPA } = req.body;
+    const newUser = new User({
+      name,
+      stdDept,
+      stdPhone,
+      stdCGPA
+    });
+    // var query = req.user;
+    // await User.findByIdAndUpdate(query, newUser);
+    await newUser.save();
+    res.redirect('/users/profile')
+  }
+})
+
+router.get('/editprofile/:id',(req,res)=>{
+  User.findOne({
+    _id: ObjectId(req.params.id)
+  }, function(err, doc) {
+    console.log(doc);
+    res.render('editprofile',{
+      userinfo : doc
+    });
+  })
+  
+});
+
+
+// router.put('/editprofile/',(req, res)=>{
+//   console.log(req.params.stdId)
+  
+//   const { name, email, stdId, stdDept, stdPhone,stdCGPA } = req.params;
+//   var updatedInfo = {
+//     name: req.params.name,
+//     stdDept: req.params.stdDept,
+//     stdPhone: req.params.stdPhone,
+//     stdCGPA: req.params.stdCGPA,
+
+//   }
+//   User.findAndModify({
+//     query: { _id: ObjectId(req.user._id) },
+//     update: { $set: { updatedInfo } },
+//     new: true
+//   }, function (err, doc, lastErrorObject) {
+//     if(err){
+//       console.log(err);
+//     }
+//     res.redirect('/users/profile');
+//   })
+// });
 
 // Login
 router.post("/login", (req, res, next) => {

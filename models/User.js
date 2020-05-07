@@ -19,9 +19,6 @@ const UserSchema = new mongoose.Schema({
   stdDept: {
     type: String,
   },
-  stdMail: {
-    type: String,
-  },
   stdPhone: {
     type: Number,
   },

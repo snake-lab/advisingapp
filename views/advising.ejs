@@ -1,1 +1,61 @@
-<h1>This is advising</h1>
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mb-3">
+        </i> Advise Courses
+      </h1>
+      <% include ./partials/messages %>
+      <form action="/advising" method="POST">
+        <div class="form-group">
+          <!-- HERE THE stdId of the USER will be used -->
+          <label for="userId">Student ID</label>
+          <input type="text" id="userId" name="userID" class="form-control" value="<%= user.stdId %>" />
+        </div>
+        <div class="form-group">
+          <label for="courseTitle">Course Title</label>
+          <div class="form-group">
+            <label for="sel1">Select list:</label>
+            <select class="form-control" id="sel1" name="courseID">
+              <% courses.forEach(course =>{  %>
+              <option value="<%= course.courseId %>"><%= course.courseId %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Add Course
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<br/>
+<br/>
+<br/>
+<div class="row">
+<table class="table">
+    <thead>
+      <tr>
+        <th>Student ID</th>
+        <th>Course Title</th>
+        <th>Advising Date</th>
+        <th>Schedule</th>
+        <th>Room</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <% advisings.forEach(advising => { %>
+      <tr>
+        <td> <%= advising.userID %></td>
+        <td> <%= advising.courseID %></td>
+        <td> <%= advising.date %></td>
+        <td><a href="/schedule/<%= advising.courseID %>">Schedule</a></td>
+        
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">
+        <form action="/users/profile" method="put">
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input required  type="text" name="name" id="Name" class="form-control" value="<%= userinfo.name %>">
+            </div>
+            <div class="form-group">
+                <label for="stdDept">Student Department</label>
+                <input required type="text" name="stdDept" id="stdDept" class="form-control" value="<%= userinfo.stdDept %>">
+            </div>
+            <div class="form-group">
+                <label for="stdPhone">Student Phone</label>
+                <input required  type="text" name="stdPhone" id="stdPhone" class="form-control" value="<%= userinfo.stdPhone %>">
+            </div>
+            <div class="form-group">
+                <label for="stdCGPA">Student CGPA</label>
+                <input required type="text" name="stdCGPA" id="stdCGPA" class="form-control" value="<%= userinfo.stdCGPA %>">
+            </div>
+            <a href="/" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class=" btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
