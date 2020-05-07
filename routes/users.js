@@ -6,10 +6,7 @@ const passport = require("passport");
 const User = require("../models/User");
 const { forwardAuthenticated } = require("../config/auth");
 
-
-
-// advising
-router.get("/advising", (req, res) => {
+router.get("/advising1", (req, res) => {
   if (req.isAuthenticated()) {
     res.render("advising");
   } else {
@@ -25,7 +22,6 @@ router.get("/login", forwardAuthenticated, (req, res) => {
     res.render("login");
   }
 });
-
 
 // Register Page
 router.get("/register", forwardAuthenticated, (req, res) => {

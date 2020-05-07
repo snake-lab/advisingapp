@@ -5,41 +5,35 @@ const passport = require("passport");
 // Load User model
 const Advising = require("../models/Advising");
 
-
-
-
 // app.get('/',(req,res)=>{
 //     db.users.find((err,docs)=>{
-//         //console.log(docs);  
+//         //console.log(docs);
 //         res.render('index',{
-//           title : 'customer',  
+//           title : 'customer',
 //           users: docs
 //         });
 //     })
 //     //var title  = 'customers';
 // })
 
-
-
 // advising
-router.get("/advising", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.render("advising");
-  } else {
-    res.redirect("/users/login");
-  }
+router.get("/advising1", (req, res) => {
+  // if (req.isAuthenticated()) {
+  //   res.render("advising");
+  // } else {
+  //   res.redirect("/users/login");
+  // }
+
+  res.render("advising");
 });
 
+router.get("/advising", async (req, res) => {
+  const courselist = await Advising.find();
 
-router.get('/advising',async (req,res)=>{
-
-    const courselist = await Advising.find();
-
-    res.render('advising',{
-        courselist
-    })
-})
-
+  res.render("advising", {
+    courselist,
+  });
+});
 
 router.post("/advise", (req, res) => {
   const { userID, courseID } = req.body;
