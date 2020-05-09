@@ -11,17 +11,15 @@
           <label for="userId">Student ID</label>
           <input type="text" id="userId" name="userID" class="form-control" value="<%= user.stdId %>" />
         </div>
-        <div class="form-group">
-          <label for="courseTitle">Course Title</label>
+
           <div class="form-group">
-            <label for="sel1">Select list:</label>
+            <label for="sel1">Select Course:</label>
             <select class="form-control" id="sel1" name="courseID">
               <% courses.forEach(course =>{  %>
               <option value="<%= course.courseId %>"><%= course.courseId %></option>
               <% }) %>
             </select>
           </div>
-        </div>
 
         <button type="submit" class="btn btn-primary btn-block">
           Add Course
@@ -41,8 +39,6 @@
         <th>Student ID</th>
         <th>Course Title</th>
         <th>Advising Date</th>
-        <th>Schedule</th>
-        <th>Room</th>
         
       </tr>
     </thead>
@@ -52,7 +48,7 @@
         <td> <%= advising.userID %></td>
         <td> <%= advising.courseID %></td>
         <td> <%= advising.date %></td>
-        <td><a href="/schedule/<%= advising.courseID %>">Schedule</a></td>
+        <td><a href="/delete/<%=advising._id%>" onclick="return confirm('Are you sure to delete this record ?');">DELETE</a></td>
         
       </tr>
       <% }) %>

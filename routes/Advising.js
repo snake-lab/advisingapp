@@ -2,10 +2,15 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+const mongojs = require('mongojs');
 // Load User model
 const Advising = require("../models/Advising");
 const user = require("../models/User")
 const course = require("../models/Course")
+
+var db = mongojs('mongodb://localhost:27017/advising', ['advisings'])
+var ObjectId = mongojs.ObjectID;
+
 // app.get('/',(req,res)=>{
 //     db.users.find((err,docs)=>{
 //         //console.log(docs);
@@ -50,7 +55,7 @@ router.get("/schedule/:courseID", async (req, res) => {
   if (req.isAuthenticated()) {
     const courseID = req.params.courseID;
     const courses = await course.find({courseID});
-    
+    console.log(courses)
     res.render("schedule",{
       courses
     });
@@ -58,6 +63,18 @@ router.get("/schedule/:courseID", async (req, res) => {
     res.redirect("/users/login");
   }
 });
+
+router.get('/delete/:id', (req, res) => {
+  Advising.findByIdAndRemove(req.params.id, (err, doc) => {
+      if (!err) {
+          res.redirect('/advising')
+      }
+      else { console.log('Error in advising delete :' + err)}
+  })
+})
+
+
+
 
 
 module.exports = router

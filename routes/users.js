@@ -125,23 +125,25 @@ router.get("/profile", (req, res) => {
 //     }
 // })
 
+//REAL CODE HERE
 
-router.put('/editprofile/',async (req,res)=>{
-  if(req.isAuthenticated()){
-    const { name, email, stdId, stdDept, stdPhone,stdCGPA } = req.body;
-    const newUser = new User({
-      name,
-      stdDept,
-      stdPhone,
-      stdCGPA
-    });
-    // var query = req.user;
-    // await User.findByIdAndUpdate(query, newUser);
-    await newUser.save();
-    res.redirect('/users/profile')
-  }
-})
+// router.put('/editprofile/',async (req,res)=>{
+//   if(req.isAuthenticated()){
+//     const { name, email, stdId, stdDept, stdPhone,stdCGPA } = req.body;
+//     const newUser = new User({
+//       name,
+//       stdDept,
+//       stdPhone,
+//       stdCGPA
+//     });
+//     // var query = req.user;
+//     // await User.findByIdAndUpdate(query, newUser);
+//     await newUser.save();
+//     res.redirect('/users/profile')
+//   }
+// })
 
+// REAL CODE ENDS HERE
 router.get('/editprofile/:id',(req,res)=>{
   User.findOne({
     _id: ObjectId(req.params.id)
@@ -153,6 +155,26 @@ router.get('/editprofile/:id',(req,res)=>{
   })
   
 });
+
+router.post('/editprofile', (req, res) => {
+  if(req.isAuthenticated()){
+    updateRecord(req, res);
+  }
+});
+
+function updateRecord(req, res) {
+    const { name, email, stdId, stdDept, stdPhone,stdCGPA } = req.body;
+    const newUser = new User({
+      name,
+      stdDept,
+      stdPhone,
+      stdCGPA
+    });
+    User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
+      if (!err) { res.redirect('/users/profile')}
+      
+  });
+}
 
 
 // router.put('/editprofile/',(req, res)=>{

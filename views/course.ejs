@@ -43,7 +43,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="courseCredit">Course Credit</label>
+            <label for="schedule">Course Schedule</label>
             <input
               type="text"
               id="schedule"
@@ -52,7 +52,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="room">Course Credit</label>
+            <label for="room">Course Room</label>
             <input
               type="text"
               id="room"
@@ -79,6 +79,8 @@
         <th>Course Title</th>
         <th>Course Dept</th>
         <th>Course Credit</th>
+        <th>Course Schedule</th>
+        <th>Course Room</th>
       </tr>
     </thead>
     <tbody>
@@ -88,6 +90,8 @@
         <td> <%= course.courseTitle %></td>
         <td> <%= course.courseDept %></td>
         <td> <%= course.courseCredit %></td>
+        <td> <%= course.schedule %></td>
+        <td> <%= course.room %></td>
       </tr>
       <% }) %>
     </tbody>
